@@ -5,6 +5,8 @@
 
   let slideElm: HTMLDivElement;
 
+  let lastPath = "";
+
   onNavigate(async (navigation) => {
     slideElm.style.display = "block";
     if (navigation.delta === 1) {
@@ -28,6 +30,7 @@
           slideElm.style.display = "none";
         });
     }
+    lastPath = navigation.to?.url.pathname ?? "";
     await sleep(500);
   });
 </script>
@@ -44,14 +47,26 @@
           </a>
         </div>
         <div class="buttons">
-          <a class="button" href="/about-me">Hakkımda</a>
-          <a class="button" href="/projects">Projelerim</a>
-          <a class="button" href="/links">Linkler</a>
+          <a
+            class="button"
+            href="/about-me"
+            class:active={lastPath === "/about-me"}>Hakkımda</a
+          >
+          <a
+            class="button"
+            href="/projects"
+            class:active={lastPath === "/projects"}>Projelerim</a
+          >
+          <a class="button" href="/links" class:active={lastPath === "/links"}
+            >Linkler</a
+          >
         </div>
       </div>
     </div>
     <div class="slot">
-      <slot />
+      <div class="container">
+        <slot />
+      </div>
     </div>
   </div>
 </div>
@@ -83,6 +98,7 @@
       display: flex;
       flex-direction: column;
       gap: 0.5rem;
+      --full-height: calc(100vh - 50px);
 
       & > .nav {
         display: flex;
@@ -148,20 +164,39 @@
               transition: all 0.1s ease;
               font-size: 1rem;
 
-              &:hover {
+              &:hover,
+              &.active {
                 color: var(--theme-white);
                 background-color: var(--theme-black);
               }
             }
           }
         }
+      }
 
-        @media screen and (max-width: 720px) {
+      & > .slot {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 1rem;
+        height: var(--full-height);
+
+        & > .container {
+          height: 100%;
+          max-width: 720px;
+          width: 100%;
+        }
+      }
+
+      @media screen and (max-width: 720px) {
+        --full-height: calc(100vh - 75px);
+
+        & > .nav {
           height: 75px;
 
           & > .container {
             flex-direction: column;
-            gap: 0.25rem;
+            gap: 8px;
           }
         }
       }
