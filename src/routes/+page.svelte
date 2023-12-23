@@ -79,6 +79,7 @@
       p {
         font-size: 1.2em;
         line-height: 1.5;
+        color: var(--theme-black);
 
         .huge {
           font-size: 1.6em;
