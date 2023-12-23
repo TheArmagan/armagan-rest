@@ -47,10 +47,7 @@
           </a>
         </div>
         <div class="buttons">
-          <a
-            class="button"
-            href="/about-me"
-            class:active={lastPath === "/about-me"}>Hakkımda</a
+          <a class="button" href="/" class:active={lastPath === "/"}>Hakkımda</a
           >
           <a
             class="button"
@@ -97,14 +94,14 @@
       z-index: 1;
       display: flex;
       flex-direction: column;
-      gap: 0.5rem;
-      --full-height: calc(100vh - 50px);
+      gap: 1rem;
+      --full-height: calc(100vh - 55px);
 
       & > .nav {
         display: flex;
         align-items: center;
         justify-content: center;
-        height: 50px;
+        height: 55px;
 
         & > .container {
           padding: 0 1rem;
@@ -114,6 +111,7 @@
           align-items: center;
           justify-content: space-between;
           gap: 0.5rem;
+          position: fixed;
 
           & > .title {
             display: flex;
